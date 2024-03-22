@@ -11,15 +11,20 @@ export const getVideo = (async () => {
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
 
+      let drawing = true;
+
       const draw = () => {
-        context.drawImage(video, 0, 0);
-        requestAnimationFrame(draw);
+        if (drawing) {
+          context.drawImage(video, 0, 0);
+          requestAnimationFrame(draw);
+        }
       };
 
       draw();
       video.play();
 
       let selfie = false;
+
       const btn = document.getElementById("takeSelfie");
 
       btn.addEventListener("click", () => {
@@ -27,7 +32,10 @@ export const getVideo = (async () => {
           video.pause();
           btn.textContent = "Go back!";
           selfie = true;
+          drawing = false;
         } else {
+          drawing = true;
+          draw();
           video.play();
           selfie = false;
           btn.textContent = "Take a selfie!";
