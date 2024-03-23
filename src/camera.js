@@ -33,13 +33,20 @@ export const getVideo = (async () => {
           btn.textContent = "Go back!";
           selfie = true;
           drawing = false;
+          btn.className =
+            "bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded";
         } else {
           drawing = true;
           draw();
           video.play();
           selfie = false;
           btn.textContent = "Take a selfie!";
+          btn.className =
+            "bg-gray-950 hover:bg-gray-800 p-3 rounded-md text-white border-2 border-white";
         }
+        const textBtn = document.getElementById("textBtn");
+
+        textBtn.classList.toggle("hidden");
       });
     };
   } catch (error) {
