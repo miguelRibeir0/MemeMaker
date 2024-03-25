@@ -1,4 +1,4 @@
-export const getVideo = (async () => {
+const getVideo = (async () => {
   try {
     const stream = await navigator.mediaDevices.getUserMedia({ video: true });
     const video = document.createElement("video");

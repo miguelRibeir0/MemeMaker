@@ -28,45 +28,100 @@ const drawTextBottom = (inputText) => {
 
 //MODAL
 
-const modal = document.getElementById("textModal");
+const modal = document.getElementById("modal");
 
 const textBtn = document.getElementById("textBtn");
-const closeModal = document.getElementById("closeTextModal");
 
 textBtn.addEventListener("click", () => {
   modal.classList.toggle("invisible");
-});
+  modal.innerHTML = `
+    <div class="absolute w-2/6 h-2/6 bg-slate-200 flex items-center justify-center rounded-sm">
+      <button
+        class="absolute bg-red-400 hover:bg-red-500 py-2 px-3 rounded-md top-4 right-4 text-white"
+        id="closeTextModal"
+      >
+        X
+      </button>
+      <div class="flex flex-col w-3/4 items-center justify-center gap-y-3">
+        <label
+          for="topText"
+          class="self-start uppercase text-lg font-semibold"
+          >Top Text</label
+        >
+        <div class="flex w-full mb-5 justify-between">
+          <input
+            type="text"
+            id="topText"
+            class="w-5/6 p-2"
+            placeholder="(Max 15 letters)"
+          />
+          <button
+            class="bg-black border-2 border-white text-white px-4 py-2 rounded-md text-sm"
+            id="topAdd"
+          >
+            ADD
+          </button>
+        </div>
+        <label
+          for="bottomText"
+          class="self-start uppercase text-lg font-semibold"
+          >Bottom Text</label
+        >
+        <div class="flex w-full mb-5 justify-between">
+          <input
+            type="text"
+            id="bottomText"
+            class="w-5/6 p-2"
+            placeholder="(Max 15 letters)"
+          />
+          <button
+            class="bg-black border-2 border-white text-white px-4 py-2 rounded-md text-sm"
+            id="bottomAdd"
+          >
+            ADD
+          </button>
+        </div>
+        <p class="text-red-400">
+          // Warning: Adding text twice to the same image will overlay it //
+        </p>
+      </div>
+    </div>
+  `;
 
-closeModal.addEventListener("click", () => {
-  modal.classList.toggle("invisible");
-});
+  const closeModal = document.getElementById("closeTextModal");
 
-const btnTop = document.getElementById("topAdd");
+  closeModal.addEventListener("click", () => {
+    modal.classList.toggle("invisible");
+    modal.innerHTML = "";
+  });
 
-btnTop.addEventListener("click", () => {
-  const topTextInput = document.getElementById("topText");
-  const topValue = topTextInput.value;
-  let topValueNoSpaces = topValue.replace(/\s/g, "");
-  const uppercase = topValue.toUpperCase();
+  const btnTop = document.getElementById("topAdd");
 
-  if (topValueNoSpaces.length > 15) {
-    alert("The text is too long, please use less than 15 characters");
-  } else {
-    drawTextTop(uppercase);
-  }
-});
+  btnTop.addEventListener("click", () => {
+    const topTextInput = document.getElementById("topText");
+    const topValue = topTextInput.value;
+    let topValueNoSpaces = topValue.replace(/\s/g, "");
+    const uppercase = topValue.toUpperCase();
 
-const btnBottom = document.getElementById("bottomAdd");
+    if (topValueNoSpaces.length > 15) {
+      alert("The text is too long, please use less than 15 characters");
+    } else {
+      drawTextTop(uppercase);
+    }
+  });
 
-btnBottom.addEventListener("click", () => {
-  const bottomTextInput = document.getElementById("bottomText");
-  const bottomValue = bottomTextInput.value;
-  let bottomValueNoSpaces = bottomValue.replace(/\s/g, "");
-  const uppercase = bottomValue.toUpperCase();
+  const btnBottom = document.getElementById("bottomAdd");
 
-  if (bottomValueNoSpaces.length > 15) {
-    alert("The text is too long, please use less than 15 characters");
-  } else {
-    drawTextBottom(uppercase);
-  }
+  btnBottom.addEventListener("click", () => {
+    const bottomTextInput = document.getElementById("bottomText");
+    const bottomValue = bottomTextInput.value;
+    let bottomValueNoSpaces = bottomValue.replace(/\s/g, "");
+    const uppercase = bottomValue.toUpperCase();
+
+    if (bottomValueNoSpaces.length > 15) {
+      alert("The text is too long, please use less than 15 characters");
+    } else {
+      drawTextBottom(uppercase);
+    }
+  });
 });
