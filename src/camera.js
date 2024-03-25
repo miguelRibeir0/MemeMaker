@@ -14,8 +14,33 @@ const getVideo = (async () => {
       let drawing = true;
 
       const draw = () => {
+        const bwState = localStorage.getItem("bw");
+
         if (drawing) {
-          context.drawImage(video, 0, 0);
+          if (bwState === "true") {
+            //B/W setting is enabled
+            context.drawImage(video, 0, 0);
+            const imageData = context.getImageData(
+              0,
+              0,
+              canvas.width,
+              canvas.height
+            );
+            const data = imageData.data;
+
+            for (let i = 0; i < data.length; i += 4) {
+              const avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+              data[i] = avg;
+              data[i + 1] = avg;
+              data[i + 2] = avg;
+            }
+
+            context.putImageData(imageData, 0, 0);
+          } else {
+            //No settings enabled
+            context.drawImage(video, 0, 0);
+          }
+
           requestAnimationFrame(draw);
         }
       };

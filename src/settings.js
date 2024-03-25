@@ -17,7 +17,7 @@ settings.addEventListener("click", () => {
             class="inline-flex items-center cursor-pointer gap-x-4 text-lg font-semibold justify-between"
         >
             B/W
-            <input type="checkbox" value="" class="sr-only peer self-end" />
+            <input type="checkbox" value="" class="sr-only peer self-end" id="bwCheck" />
             <div
             class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
             ></div>
@@ -27,7 +27,7 @@ settings.addEventListener("click", () => {
             class="inline-flex items-center cursor-pointer gap-x-4 text-lg font-semibold justify-between"
         >
             White Bars
-            <input type="checkbox" value="" class="sr-only peer" />
+            <input type="checkbox" value="" class="sr-only peer" id="barsCheck" />
             <div
             class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
             ></div>
@@ -37,7 +37,7 @@ settings.addEventListener("click", () => {
             class="inline-flex items-center cursor-pointer gap-x-4 text-lg font-semibold justify-between"
         >
             Timer (5s)
-            <input type="checkbox" value="" class="sr-only peer" />
+            <input type="checkbox" value="" class="sr-only peer" id="timerCheck" />
             <div
             class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
             ></div>
@@ -51,5 +51,29 @@ settings.addEventListener("click", () => {
   closeModal.addEventListener("click", () => {
     modal.classList.toggle("invisible");
     modal.innerHTML = "";
+  });
+
+  let bwCheck = document.getElementById("bwCheck");
+  let bwState = localStorage.getItem("bw");
+  bwCheck.checked = bwState === "true";
+
+  bwCheck.addEventListener("change", function () {
+    localStorage.setItem("bw", this.checked);
+  });
+
+  let barsCheck = document.getElementById("barsCheck");
+  let barsState = localStorage.getItem("bars");
+  barsCheck.checked = barsState === "true";
+
+  barsCheck.addEventListener("change", function () {
+    localStorage.setItem("bars", this.checked);
+  });
+
+  let timerCheck = document.getElementById("timerCheck");
+  let timerState = localStorage.getItem("timer");
+  timerCheck.checked = timerState === "true";
+
+  timerCheck.addEventListener("change", function () {
+    localStorage.setItem("timer", this.checked);
   });
 });
