@@ -2,28 +2,78 @@ const drawTextTop = (inputText) => {
   const canvas = document.getElementById("canvas");
   const context = canvas.getContext("2d");
 
-  context.font = "70px Impact";
-  context.fillStyle = "white";
-  context.textAlign = "center";
-  context.textBaseline = "top";
+  const barsState = localStorage.getItem("bars");
+  const textState = localStorage.getItem("text");
 
-  const centerX = canvas.width / 2;
+  if (textState === "true") {
+    context.font = "70px Impact";
+    context.fillStyle = "black";
+    context.textAlign = "center";
+    context.textBaseline = "top";
 
-  context.fillText(inputText, centerX, 20);
+    const centerX = canvas.width / 2;
+
+    context.fillText(inputText, centerX, 20);
+  } else {
+    context.font = "70px Impact";
+    context.fillStyle = "white";
+    context.textAlign = "center";
+    context.textBaseline = "top";
+
+    const centerX = canvas.width / 2;
+
+    context.fillText(inputText, centerX, 20);
+  }
+
+  if (barsState === "true") {
+    context.font = "45px Impact";
+    context.fillStyle = "black";
+    context.textAlign = "center";
+    context.textBaseline = "top";
+
+    const centerX = canvas.width / 2;
+
+    context.fillText(inputText, centerX, 15);
+  }
 };
 
 const drawTextBottom = (inputText) => {
   const canvas = document.getElementById("canvas");
   const context = canvas.getContext("2d");
 
-  context.font = "70px Impact";
-  context.fillStyle = "white";
-  context.textAlign = "center";
-  context.textBaseline = "bottom";
+  const barsState = localStorage.getItem("bars");
+  const textState = localStorage.getItem("text");
 
-  const centerX = canvas.width / 2;
+  if (textState === "true") {
+    context.font = "70px Impact";
+    context.fillStyle = "black";
+    context.textAlign = "center";
+    context.textBaseline = "bottom";
 
-  context.fillText(inputText, centerX, 460);
+    const centerX = canvas.width / 2;
+
+    context.fillText(inputText, centerX, 460);
+  } else {
+    context.font = "70px Impact";
+    context.fillStyle = "white";
+    context.textAlign = "center";
+    context.textBaseline = "bottom";
+
+    const centerX = canvas.width / 2;
+
+    context.fillText(inputText, centerX, 460);
+  }
+
+  if (barsState === "true") {
+    context.font = "45px Impact";
+    context.fillStyle = "black";
+    context.textAlign = "center";
+    context.textBaseline = "bottom";
+
+    const centerX = canvas.width / 2;
+
+    context.fillText(inputText, centerX, 470);
+  }
 };
 
 //MODAL

@@ -15,11 +15,14 @@ const getVideo = (async () => {
 
       const draw = () => {
         const bwState = localStorage.getItem("bw");
+        const barsState = localStorage.getItem("bars");
 
         if (drawing) {
+          //no setting are enabled
+          context.drawImage(video, 0, 0);
+
           if (bwState === "true") {
-            //B/W setting is enabled
-            context.drawImage(video, 0, 0);
+            //BW setting is enabled
             const imageData = context.getImageData(
               0,
               0,
@@ -36,9 +39,13 @@ const getVideo = (async () => {
             }
 
             context.putImageData(imageData, 0, 0);
-          } else {
-            //No settings enabled
-            context.drawImage(video, 0, 0);
+          }
+
+          if (barsState === "true") {
+            //White bars setting is enabled
+            context.fillStyle = "white";
+            context.fillRect(0, 0, canvas.width, 70);
+            context.fillRect(0, canvas.height - 70, canvas.width, 70);
           }
 
           requestAnimationFrame(draw);
@@ -52,14 +59,47 @@ const getVideo = (async () => {
 
       const btn = document.getElementById("takeSelfie");
 
+      function countDown(duration) {
+        let countdown = duration;
+        btn.textContent = `${countdown}s`;
+
+        const countdownInterval = setInterval(() => {
+          countdown--;
+          if (countdown >= 0) {
+            btn.textContent = `${countdown}s`;
+          } else {
+            clearInterval(countdownInterval);
+          }
+        }, 1000);
+      }
+
       btn.addEventListener("click", () => {
+        const timerState = localStorage.getItem("timer");
+        const textBtn = document.getElementById("textBtn");
+
         if (!selfie) {
-          video.pause();
-          btn.textContent = "Go back!";
-          selfie = true;
-          drawing = false;
-          btn.className =
-            "bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded";
+          if (timerState === "true") {
+            countDown(5);
+            btn.className =
+              "bg-transparent border-black p-3 rounded-md text-black border-2 cursor-default";
+            setTimeout(() => {
+              video.pause();
+              btn.textContent = "Go back!";
+              selfie = true;
+              drawing = false;
+              btn.className =
+                "bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded";
+              textBtn.classList.toggle("hidden");
+            }, 5000);
+          } else {
+            video.pause();
+            btn.textContent = "Go back!";
+            selfie = true;
+            drawing = false;
+            btn.className =
+              "bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded";
+            textBtn.classList.toggle("hidden");
+          }
         } else {
           drawing = true;
           draw();
@@ -68,10 +108,8 @@ const getVideo = (async () => {
           btn.textContent = "Take a selfie!";
           btn.className =
             "bg-gray-950 hover:bg-gray-800 p-3 rounded-md text-white border-2 border-white";
+          textBtn.classList.toggle("hidden");
         }
-        const textBtn = document.getElementById("textBtn");
-
-        textBtn.classList.toggle("hidden");
       });
     };
   } catch (error) {
