@@ -76,6 +76,7 @@ const getVideo = (async () => {
       btn.addEventListener("click", () => {
         const timerState = localStorage.getItem("timer");
         const textBtn = document.getElementById("textBtn");
+        const saveBtn = document.getElementById("saveBtn");
 
         if (!selfie) {
           if (timerState === "true") {
@@ -90,6 +91,7 @@ const getVideo = (async () => {
               btn.className =
                 "bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded";
               textBtn.classList.toggle("hidden");
+              saveBtn.classList.toggle("hidden");
             }, 5000);
           } else {
             video.pause();
@@ -99,6 +101,7 @@ const getVideo = (async () => {
             btn.className =
               "bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded";
             textBtn.classList.toggle("hidden");
+            saveBtn.classList.toggle("hidden");
           }
         } else {
           drawing = true;
@@ -109,6 +112,7 @@ const getVideo = (async () => {
           btn.className =
             "bg-gray-950 hover:bg-gray-800 p-3 rounded-md text-white border-2 border-white";
           textBtn.classList.toggle("hidden");
+          saveBtn.classList.toggle("hidden");
         }
       });
     };
