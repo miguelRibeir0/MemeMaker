@@ -5,35 +5,22 @@ const drawTextTop = (inputText) => {
   const barsState = localStorage.getItem("bars");
   const textState = localStorage.getItem("text");
 
-  if (textState === "true") {
-    context.font = "70px Impact";
-    context.fillStyle = "black";
-    context.textAlign = "center";
-    context.textBaseline = "top";
+  context.font = "70px Impact";
+  context.textAlign = "center";
+  context.textBaseline = "top";
 
-    const centerX = canvas.width / 2;
-
-    context.fillText(inputText, centerX, 20);
-  } else {
-    context.font = "70px Impact";
-    context.fillStyle = "white";
-    context.textAlign = "center";
-    context.textBaseline = "top";
-
-    const centerX = canvas.width / 2;
-
-    context.fillText(inputText, centerX, 20);
-  }
+  const centerX = canvas.width / 2;
 
   if (barsState === "true") {
-    context.font = "45px Impact";
     context.fillStyle = "black";
-    context.textAlign = "center";
-    context.textBaseline = "top";
-
-    const centerX = canvas.width / 2;
-
+    context.font = "45px Impact";
     context.fillText(inputText, centerX, 15);
+  } else if (textState === "true") {
+    context.fillStyle = "black";
+    context.fillText(inputText, centerX, 20);
+  } else {
+    context.fillStyle = "white";
+    context.fillText(inputText, centerX, 20);
   }
 };
 
@@ -44,35 +31,22 @@ const drawTextBottom = (inputText) => {
   const barsState = localStorage.getItem("bars");
   const textState = localStorage.getItem("text");
 
-  if (textState === "true") {
-    context.font = "70px Impact";
-    context.fillStyle = "black";
-    context.textAlign = "center";
-    context.textBaseline = "bottom";
+  context.font = "70px Impact";
+  context.textAlign = "center";
+  context.textBaseline = "bottom";
 
-    const centerX = canvas.width / 2;
-
-    context.fillText(inputText, centerX, 460);
-  } else {
-    context.font = "70px Impact";
-    context.fillStyle = "white";
-    context.textAlign = "center";
-    context.textBaseline = "bottom";
-
-    const centerX = canvas.width / 2;
-
-    context.fillText(inputText, centerX, 460);
-  }
+  const centerX = canvas.width / 2;
 
   if (barsState === "true") {
-    context.font = "45px Impact";
     context.fillStyle = "black";
-    context.textAlign = "center";
-    context.textBaseline = "bottom";
-
-    const centerX = canvas.width / 2;
-
+    context.font = "45px Impact";
     context.fillText(inputText, centerX, 470);
+  } else if (textState === "true") {
+    context.fillStyle = "black";
+    context.fillText(inputText, centerX, 465);
+  } else {
+    context.fillStyle = "white";
+    context.fillText(inputText, centerX, 465);
   }
 };
 
